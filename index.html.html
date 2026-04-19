@@ -5,231 +5,247 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CPF & BTO Explorer — Social Studies Chapter 2</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --color-text-primary: #1a1a1a;
-    --color-text-secondary: #6b7280;
-    --color-background-primary: #ffffff;
-    --color-background-secondary: #f3f4f6;
-    --color-border-tertiary: rgba(0,0,0,0.12);
-    --color-border-secondary: rgba(0,0,0,0.25);
-    --font-sans: 'Inter', system-ui, sans-serif;
-    --font-serif: Georgia, serif;
-    --border-radius-md: 8px;
-    --border-radius-lg: 12px;
+    --text-primary: #1a1a1a;
+    --text-secondary: #6b7280;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f3f4f6;
+    --bg-tertiary: #e9ecef;
+    --border: rgba(0,0,0,0.10);
+    --blue: #1a5c9a;
+    --blue-light: #e8f1fb;
+    --green: #2e9e75;
+    --green-light: #eaf3de;
+    --orange: #d85a30;
+    --orange-light: #faeeda;
+    --purple: #7f77dd;
+    --purple-light: #eeedfe;
+    --oa: #3266ad;
+    --sa: #2e9e75;
+    --ma: #d85a30;
+    --rad: 12px;
+    --rad-sm: 8px;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --color-text-primary: #f0f0f0;
-      --color-text-secondary: #9ca3af;
-      --color-background-primary: #1f2937;
-      --color-background-secondary: #111827;
-      --color-border-tertiary: rgba(255,255,255,0.1);
-      --color-border-secondary: rgba(255,255,255,0.2);
+      --text-primary: #f0f0f0;
+      --text-secondary: #9ca3af;
+      --bg-primary: #1f2937;
+      --bg-secondary: #111827;
+      --bg-tertiary: #0d1117;
+      --border: rgba(255,255,255,0.10);
+      --blue-light: #0c2240;
+      --green-light: #173404;
+      --orange-light: #412402;
+      --purple-light: #26215c;
     }
-    .verdict.ok { background: #173404; color: #c0dd97; }
-    .verdict.tight { background: #412402; color: #fac775; }
-    .verdict.hard { background: #501313; color: #f09595; }
+    .verdict.ok { background:#173404;color:#c0dd97; }
+    .verdict.tight { background:#412402;color:#fac775; }
+    .verdict.hard { background:#501313;color:#f09595; }
+    .hero-overlay { background: linear-gradient(to right, rgba(0,0,0,0.82) 40%, rgba(0,0,0,0.4)); }
   }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg-secondary);color:var(--text-primary);min-height:100vh;padding:2rem 1rem;}
+  .wrapper{max-width:820px;margin:0 auto;background:var(--bg-primary);border-radius:20px;overflow:hidden;border:0.5px solid var(--border);box-shadow:0 4px 32px rgba(0,0,0,.07);}
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: var(--font-sans);
-    background: var(--color-background-secondary);
-    color: var(--color-text-primary);
-    min-height: 100vh;
-    padding: 2rem 1rem;
-  }
-  .wrapper {
-    max-width: 780px;
-    margin: 0 auto;
-    background: var(--color-background-primary);
-    border-radius: 16px;
-    padding: 2rem;
-    border: 0.5px solid var(--color-border-tertiary);
-  }
+  /* ── HERO ── */
+  .hero{position:relative;height:200px;overflow:hidden;}
+  .hero img{width:100%;height:100%;object-fit:cover;display:block;}
+  .hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(10,30,70,0.82) 40%,rgba(10,30,70,0.35));display:flex;flex-direction:column;justify-content:center;padding:2rem;}
+  .hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:4px 12px;font-size:11px;color:#fff;font-weight:500;margin-bottom:10px;width:fit-content;}
+  .hero-title{font-size:22px;font-weight:600;color:#fff;line-height:1.25;}
+  .hero-sub{font-size:13px;color:rgba(255,255,255,.75);margin-top:4px;}
 
-  .page-title { font-size: 22px; font-weight: 500; color: var(--color-text-primary); }
-  .page-sub { font-size: 13px; color: var(--color-text-secondary); margin-top: 4px; margin-bottom: 1.5rem; }
+  /* ── TABS ── */
+  .tab-bar{display:flex;border-bottom:0.5px solid var(--border);background:var(--bg-primary);padding:0 1.5rem;}
+  .tab-btn{padding:12px 20px;font-size:14px;font-weight:500;cursor:pointer;border:none;background:none;color:var(--text-secondary);border-bottom:2px solid transparent;transition:all .2s;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:6px;}
+  .tab-btn.active{color:var(--blue);border-bottom-color:var(--blue);}
+  .tab-panel{display:none;padding:1.5rem;}
+  .tab-panel.active{display:block;}
 
-  .tab-bar { display: flex; border-bottom: 0.5px solid var(--color-border-tertiary); margin-bottom: 1.5rem; }
-  .tab-btn {
-    padding: 10px 20px; font-size: 14px; font-weight: 500; cursor: pointer;
-    border: none; background: none; color: var(--color-text-secondary);
-    border-bottom: 2px solid transparent; transition: all .2s; font-family: var(--font-sans);
-  }
-  .tab-btn.active { color: #1a5c9a; border-bottom-color: #1a5c9a; }
-  .tab-panel { display: none; }
-  .tab-panel.active { display: block; }
+  /* ── TYPOGRAPHY ── */
+  .section-label{font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--text-secondary);margin-bottom:8px;}
+  .section-title{font-size:16px;font-weight:600;color:var(--text-primary);margin-bottom:4px;}
 
-  .section-label {
-    font-size: 11px; font-weight: 500; letter-spacing: .06em;
-    text-transform: uppercase; color: var(--color-text-secondary); margin-bottom: 8px;
-  }
-  .card {
-    background: var(--color-background-primary);
-    border: 0.5px solid var(--color-border-tertiary);
-    border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; margin-bottom: 1rem;
-  }
-  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 1rem; }
-  .metric {
-    background: var(--color-background-secondary);
-    border-radius: var(--border-radius-md); padding: .75rem 1rem;
-  }
-  .metric-label { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 4px; display: flex; align-items: center; gap: 4px; }
-  .metric-val { font-size: 20px; font-weight: 500; color: var(--color-text-primary); }
-  .metric-sub { font-size: 11px; color: var(--color-text-secondary); margin-top: 2px; }
+  /* ── CARDS ── */
+  .card{background:var(--bg-primary);border:0.5px solid var(--border);border-radius:var(--rad);padding:1rem 1.25rem;margin-bottom:1rem;}
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:1rem;}
+  .metric{background:var(--bg-secondary);border-radius:var(--rad-sm);padding:.75rem 1rem;}
+  .metric-label{font-size:12px;color:var(--text-secondary);margin-bottom:4px;display:flex;align-items:center;gap:4px;}
+  .metric-val{font-size:20px;font-weight:600;color:var(--text-primary);}
+  .metric-sub{font-size:11px;color:var(--text-secondary);margin-top:2px;}
 
-  .basket-bar { display: flex; height: 28px; border-radius: 6px; overflow: hidden; margin: 12px 0; }
-  .basket-seg { display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; transition: flex .4s; }
+  /* ── INFO BOX ── */
+  .info-box{font-size:13px;color:var(--text-secondary);padding:10px 14px;background:var(--bg-secondary);border-radius:var(--rad-sm);border-left:3px solid var(--blue);margin:10px 0;line-height:1.6;}
+  .info-box strong{color:var(--text-primary);}
 
-  .contrib-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  .contrib-table th { text-align: left; color: var(--color-text-secondary); font-weight: 500; padding: 6px 8px; border-bottom: 0.5px solid var(--color-border-tertiary); font-size: 12px; }
-  .contrib-table td { padding: 7px 8px; border-bottom: 0.5px solid var(--color-border-tertiary); color: var(--color-text-primary); }
-  .contrib-table tr:last-child td { border-bottom: none; }
-  .contrib-table .highlight { background: var(--color-background-secondary); font-weight: 500; }
+  /* ── ACCOUNT CARDS ── */
+  .acct-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:1rem;}
+  .acct-card{border-radius:var(--rad);padding:1.1rem 1.25rem;border:0.5px solid var(--border);background:var(--bg-primary);position:relative;overflow:hidden;}
+  .acct-icon{font-size:28px;margin-bottom:8px;display:block;}
+  .acct-title{font-size:13px;font-weight:600;margin-bottom:6px;}
+  .acct-body{font-size:12px;color:var(--text-secondary);line-height:1.65;}
+  .acct-rate{display:inline-block;margin-top:8px;font-size:11px;font-weight:600;padding:3px 8px;border-radius:4px;}
 
-  .dot { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 4px; vertical-align: middle; }
+  /* ── BASKET BAR ── */
+  .basket-bar{display:flex;height:32px;border-radius:8px;overflow:hidden;margin:12px 0;}
+  .basket-seg{display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;transition:flex .4s;}
 
-  .flat-selector { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin: 8px 0 12px; }
-  .flat-btn {
-    padding: 8px 4px; text-align: center; font-size: 12px; font-weight: 500;
-    border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md);
-    cursor: pointer; background: var(--color-background-primary); color: var(--color-text-secondary);
-    transition: all .15s; font-family: var(--font-sans);
-  }
-  .flat-btn.selected { background: #1a5c9a; color: #fff; border-color: #1a5c9a; }
-  .flat-price { font-size: 10px; font-weight: 400; margin-top: 2px; }
+  /* ── CONTRIB TABLE ── */
+  .contrib-table{width:100%;border-collapse:collapse;font-size:13px;}
+  .contrib-table th{text-align:left;color:var(--text-secondary);font-weight:500;padding:7px 10px;border-bottom:0.5px solid var(--border);font-size:12px;}
+  .contrib-table td{padding:8px 10px;border-bottom:0.5px solid var(--border);color:var(--text-primary);}
+  .contrib-table tr:last-child td{border-bottom:none;}
+  .contrib-table .highlight{background:var(--blue-light);}
+  .contrib-table .highlight td{color:var(--blue);font-weight:600;}
 
-  .profile-box {
-    background: var(--color-background-secondary);
-    border-radius: var(--border-radius-md); padding: 1rem; margin-bottom: 10px;
-  }
-  .profile-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
-  .avatar { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 500; }
-  .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 13px; }
-  .profile-row { display: flex; flex-direction: column; gap: 2px; }
-  .profile-key { color: var(--color-text-secondary); font-size: 11px; }
-  .profile-val { font-weight: 500; color: var(--color-text-primary); }
+  /* ── SLIDERS & SELECTS ── */
+  .slider-row{display:flex;align-items:center;gap:10px;margin:8px 0;}
+  .slider-row label{font-size:13px;color:var(--text-secondary);width:140px;flex-shrink:0;display:flex;align-items:center;gap:5px;}
+  .slider-row input[type=range]{flex:1;accent-color:var(--blue);}
+  .slider-row select{flex:1;padding:6px 8px;font-size:13px;background:var(--bg-primary);color:var(--text-primary);border:0.5px solid var(--border);border-radius:var(--rad-sm);font-family:'Inter',sans-serif;}
+  .slider-val{font-size:13px;font-weight:600;min-width:72px;text-align:right;color:var(--text-primary);}
 
-  .result-breakdown { font-size: 13px; }
-  .result-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 0.5px solid var(--color-border-tertiary); }
-  .result-row:last-child { border-bottom: none; }
-  .result-row.total { font-weight: 500; font-size: 14px; padding-top: 10px; }
-  .result-sign-pos { color: #2e9e75; }
-  .result-sign-neg { color: #d85a30; }
+  /* ── FLAT SELECTOR ── */
+  .flat-selector{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:8px 0 12px;}
+  .flat-btn{padding:10px 4px;text-align:center;font-size:12px;font-weight:500;border:0.5px solid var(--border);border-radius:var(--rad-sm);cursor:pointer;background:var(--bg-primary);color:var(--text-secondary);transition:all .15s;font-family:'Inter',sans-serif;}
+  .flat-btn .flat-emoji{font-size:20px;display:block;margin-bottom:4px;}
+  .flat-btn.selected{background:var(--blue);color:#fff;border-color:var(--blue);}
+  .flat-price{font-size:10px;font-weight:400;margin-top:2px;opacity:.85;}
 
-  .big-result { text-align: center; padding: 1.25rem; }
-  .big-result-num { font-size: 32px; font-weight: 500; color: #1a5c9a; }
-  .big-result-label { font-size: 13px; color: var(--color-text-secondary); margin-top: 4px; }
+  /* ── PROFILE BOXES ── */
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
+  .profile-box{background:var(--bg-secondary);border-radius:var(--rad-sm);padding:1rem;border:0.5px solid var(--border);}
+  .profile-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+  .avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600;flex-shrink:0;}
+  .profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px;}
+  .profile-row{display:flex;flex-direction:column;gap:2px;}
+  .profile-key{color:var(--text-secondary);font-size:11px;}
+  .profile-val{font-weight:600;color:var(--text-primary);}
 
-  .verdict { font-size: 13px; padding: 10px 14px; border-radius: var(--border-radius-md); margin-top: 10px; line-height: 1.6; }
-  .verdict.ok { background: #eaf3de; color: #3b6d11; }
-  .verdict.tight { background: #faeeda; color: #854f0b; }
-  .verdict.hard { background: #fcebeb; color: #a32d2d; }
+  /* ── RESULT ── */
+  .result-breakdown{font-size:13px;}
+  .result-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:0.5px solid var(--border);}
+  .result-row:last-child{border-bottom:none;}
+  .result-row.total{font-weight:600;font-size:14px;padding-top:10px;}
+  .pos{color:#2e9e75;} .neg{color:#d85a30;}
+  .big-result{text-align:center;padding:1.25rem;}
+  .big-result-num{font-size:32px;font-weight:700;color:var(--blue);}
+  .big-result-label{font-size:13px;color:var(--text-secondary);margin-top:4px;}
+  .verdict{font-size:13px;padding:12px 16px;border-radius:var(--rad-sm);margin-top:10px;line-height:1.65;display:flex;gap:10px;align-items:flex-start;}
+  .verdict-icon{font-size:20px;flex-shrink:0;}
+  .verdict.ok{background:#eaf3de;color:#3b6d11;}
+  .verdict.tight{background:#faeeda;color:#854f0b;}
+  .verdict.hard{background:#fcebeb;color:#a32d2d;}
 
-  .btn-randomise {
-    padding: 9px 18px; font-size: 13px; font-weight: 500; cursor: pointer;
-    border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md);
-    background: var(--color-background-primary); color: var(--color-text-primary);
-    transition: all .15s; margin-right: 8px; margin-bottom: 8px; font-family: var(--font-sans);
-  }
-  .btn-randomise:hover { background: var(--color-background-secondary); }
-  .btn-calc {
-    padding: 9px 20px; font-size: 13px; font-weight: 500; cursor: pointer;
-    border: none; border-radius: var(--border-radius-md);
-    background: #1a5c9a; color: #fff; transition: all .15s; font-family: var(--font-sans);
-  }
-  .btn-calc:hover { opacity: .88; }
+  /* ── BUTTONS ── */
+  .btn-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;}
+  .btn-rand{padding:9px 16px;font-size:13px;font-weight:500;cursor:pointer;border:0.5px solid var(--border);border-radius:var(--rad-sm);background:var(--bg-primary);color:var(--text-primary);transition:all .15s;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:6px;}
+  .btn-rand:hover{background:var(--bg-secondary);}
+  .btn-calc{padding:11px 24px;font-size:14px;font-weight:600;cursor:pointer;border:none;border-radius:var(--rad-sm);background:var(--blue);color:#fff;transition:all .15s;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:8px;margin:0 auto;}
+  .btn-calc:hover{opacity:.88;}
 
-  .slider-row { display: flex; align-items: center; gap: 10px; margin: 8px 0; }
-  .slider-row label { font-size: 13px; color: var(--color-text-secondary); width: 130px; flex-shrink: 0; }
-  .slider-row input[type=range] { flex: 1; accent-color: #1a5c9a; }
-  .slider-row select {
-    flex: 1; padding: 6px 8px; font-size: 13px;
-    background: var(--color-background-primary); color: var(--color-text-primary);
-    border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md);
-    font-family: var(--font-sans);
-  }
-  .slider-val { font-size: 13px; font-weight: 500; min-width: 72px; text-align: right; color: var(--color-text-primary); }
+  /* ── LEGEND ── */
+  .legend-row{display:flex;flex-wrap:wrap;gap:12px;margin:8px 0;font-size:12px;color:var(--text-secondary);}
+  .legend-item{display:flex;align-items:center;gap:5px;}
+  .dot{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:2px;}
 
-  .info-box {
-    font-size: 13px; color: var(--color-text-secondary); padding: 10px 14px;
-    background: var(--color-background-secondary); border-radius: var(--border-radius-md);
-    border-left: 3px solid #1a5c9a; margin: 10px 0; line-height: 1.6;
-  }
-  .info-box strong { color: var(--color-text-primary); }
+  /* ── CALLOUT STRIP ── */
+  .callout-strip{display:flex;gap:12px;margin:1rem 0;flex-wrap:wrap;}
+  .callout{flex:1;min-width:130px;background:var(--bg-secondary);border-radius:var(--rad-sm);padding:.85rem;text-align:center;border:0.5px solid var(--border);}
+  .callout-emoji{font-size:28px;margin-bottom:6px;}
+  .callout-val{font-size:18px;font-weight:700;color:var(--blue);}
+  .callout-label{font-size:11px;color:var(--text-secondary);margin-top:2px;line-height:1.4;}
 
-  .legend-row { display: flex; flex-wrap: wrap; gap: 12px; margin: 8px 0; font-size: 12px; color: var(--color-text-secondary); }
-  .legend-item { display: flex; align-items: center; gap: 5px; }
+  /* ── BTO PHOTO BANNER ── */
+  .bto-banner{position:relative;height:140px;border-radius:var(--rad);overflow:hidden;margin-bottom:1rem;}
+  .bto-banner img{width:100%;height:100%;object-fit:cover;}
+  .bto-banner-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(10,30,60,.78) 40%,rgba(10,30,60,.2));display:flex;flex-direction:column;justify-content:center;padding:1.25rem;}
+  .bto-banner-title{font-size:16px;font-weight:700;color:#fff;}
+  .bto-banner-sub{font-size:12px;color:rgba(255,255,255,.8);margin-top:4px;}
+  .bto-tag{display:inline-block;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:2px 10px;font-size:11px;color:#fff;margin-top:6px;}
 
-  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
-  .three-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-bottom: 1rem; }
+  /* ── STEP BADGE ── */
+  .step-badge{display:inline-flex;align-items:center;gap:8px;margin-bottom:8px;}
+  .step-num{width:24px;height:24px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-label{font-size:13px;font-weight:600;color:var(--text-primary);}
 
-  .acct-card { border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; border: 0.5px solid var(--color-border-tertiary); background: var(--color-background-primary); }
-  .acct-card-title { font-size: 13px; font-weight: 500; margin-bottom: 6px; }
-  .acct-card-body { font-size: 12px; color: var(--color-text-secondary); line-height: 1.6; }
-
-  .calc-center { display: flex; justify-content: center; margin: 12px 0; }
-
-  @media (max-width: 600px) {
-    .flat-selector { grid-template-columns: repeat(3, 1fr); }
-    .two-col { grid-template-columns: 1fr; }
-    .wrapper { padding: 1.25rem; }
-    .slider-row label { width: 90px; }
+  @media(max-width:600px){
+    .flat-selector{grid-template-columns:repeat(3,1fr);}
+    .two-col{grid-template-columns:1fr;}
+    .wrapper{border-radius:12px;}
+    .tab-panel{padding:1rem;}
   }
 </style>
 </head>
 <body>
 <div class="wrapper">
 
-  <div class="page-title">Government &amp; Social Wellbeing</div>
-  <div class="page-sub">Chapter 2 — CPF System &amp; Housing Affordability · Bedok South Blossoms BTO 2023</div>
-
-  <div class="tab-bar">
-    <button class="tab-btn active" onclick="switchTab(event,'cpf')">Part 1: CPF System</button>
-    <button class="tab-btn" onclick="switchTab(event,'bto')">Part 2: BTO Calculator</button>
+  <!-- HERO -->
+  <div class="hero">
+    <img src="https://images.unsplash.com/photo-1565967511849-76a60a516170?w=1200&q=80&auto=format&fit=crop" alt="Singapore HDB flats skyline" loading="eager">
+    <div class="hero-overlay">
+      <div class="hero-badge">📚 Social Studies · Chapter 2</div>
+      <div class="hero-title">Government &amp; Social Wellbeing</div>
+      <div class="hero-sub">CPF System &amp; Housing Affordability in Singapore</div>
+    </div>
   </div>
 
-  <!-- ===== PART 1: CPF ===== -->
+  <!-- TABS -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab(event,'cpf')">🏦 Part 1: CPF System</button>
+    <button class="tab-btn" onclick="switchTab(event,'bto')">🏠 Part 2: BTO Calculator</button>
+  </div>
+
+  <!-- ══════════════ PART 1: CPF ══════════════ -->
   <div id="tab-cpf" class="tab-panel active">
 
-    <div class="section-label">What is CPF?</div>
     <div class="info-box">
-      The <strong>Central Provident Fund (CPF)</strong> is Singapore's mandatory savings scheme. Both you and your employer contribute a portion of your monthly salary into CPF. These savings fund three major life needs: <strong>retirement</strong>, <strong>housing</strong>, and <strong>healthcare</strong>.
+      💡 <strong>What is CPF?</strong> The Central Provident Fund is Singapore's mandatory savings system. Every working Singaporean and their employer contribute a % of salary every month into three special accounts — ensuring everyone saves for retirement, housing, and healthcare — even if they forget to!
     </div>
 
-    <div class="section-label" style="margin-top:1.25rem;">CPF contribution rates by age (from January 2026)</div>
+    <!-- Callout numbers -->
+    <div class="callout-strip">
+      <div class="callout"><div class="callout-emoji">💰</div><div class="callout-val">37%</div><div class="callout-label">of salary goes to CPF (age ≤55)</div></div>
+      <div class="callout"><div class="callout-emoji">🏠</div><div class="callout-val">OA</div><div class="callout-label">pays for your home mortgage</div></div>
+      <div class="callout"><div class="callout-emoji">🏥</div><div class="callout-val">MA</div><div class="callout-label">covers hospital &amp; insurance bills</div></div>
+      <div class="callout"><div class="callout-emoji">👴</div><div class="callout-val">SA/RA</div><div class="callout-label">funds your retirement income</div></div>
+    </div>
+
+    <!-- Contribution rates table -->
+    <div class="section-label" style="margin-top:1.25rem;">📊 Contribution rates by age group (Jan 2026)</div>
     <div class="card" style="padding:0;overflow:hidden;">
       <table class="contrib-table">
         <thead>
           <tr>
             <th>Age group</th>
-            <th>Employee contributes</th>
-            <th>Employer contributes</th>
+            <th>👤 Employee</th>
+            <th>🏢 Employer</th>
             <th>Total</th>
           </tr>
         </thead>
         <tbody>
-          <tr class="highlight"><td>55 and below</td><td>20%</td><td>17%</td><td><strong>37%</strong></td></tr>
-          <tr><td>Above 55 to 60</td><td>18%</td><td>16%</td><td>34%</td></tr>
-          <tr><td>Above 60 to 65</td><td>12.5%</td><td>12.5%</td><td>25%</td></tr>
-          <tr><td>Above 65 to 70</td><td>7.5%</td><td>9%</td><td>16.5%</td></tr>
+          <tr class="highlight"><td>⭐ 55 &amp; below</td><td>20%</td><td>17%</td><td><strong>37%</strong></td></tr>
+          <tr><td>Above 55 – 60</td><td>18%</td><td>16%</td><td>34%</td></tr>
+          <tr><td>Above 60 – 65</td><td>12.5%</td><td>12.5%</td><td>25%</td></tr>
+          <tr><td>Above 65 – 70</td><td>7.5%</td><td>9%</td><td>16.5%</td></tr>
           <tr><td>Above 70</td><td>5%</td><td>7.5%</td><td>12.5%</td></tr>
         </tbody>
       </table>
     </div>
 
-    <div class="section-label" style="margin-top:1.25rem;">Interactive: see how contributions split by salary</div>
+    <!-- Interactive slider -->
+    <div class="section-label" style="margin-top:1rem;">🎮 Try it yourself — adjust salary &amp; age</div>
     <div class="card">
       <div class="slider-row">
-        <label>Monthly salary</label>
+        <label>💵 Monthly salary</label>
         <input type="range" id="salSlider" min="1000" max="10000" step="100" value="3500" oninput="updateCPF()">
         <span class="slider-val" id="salOut">$3,500</span>
       </div>
       <div class="slider-row">
-        <label>Age group</label>
+        <label>🎂 Age group</label>
         <select id="ageGroup" onchange="updateCPF()">
           <option value="37,20,17">55 and below (37% total)</option>
           <option value="34,18,16">56–60 (34% total)</option>
@@ -238,178 +254,188 @@
           <option value="12.5,5,7.5">Above 70 (12.5% total)</option>
         </select>
       </div>
-
       <div class="card-grid" style="margin-top:1rem;">
-        <div class="metric"><div class="metric-label">Your contribution</div><div class="metric-val" id="empAmt">$700</div><div class="metric-sub" id="empPct">20% of salary</div></div>
-        <div class="metric"><div class="metric-label">Employer's contribution</div><div class="metric-val" id="erAmt">$595</div><div class="metric-sub" id="erPct">17% of salary</div></div>
-        <div class="metric"><div class="metric-label">Total CPF per month</div><div class="metric-val" id="totAmt">$1,295</div><div class="metric-sub">Added to your accounts</div></div>
-        <div class="metric"><div class="metric-label">Take-home pay</div><div class="metric-val" id="takehome">$2,800</div><div class="metric-sub">After your CPF deducted</div></div>
+        <div class="metric"><div class="metric-label">👤 Your CPF</div><div class="metric-val" id="empAmt">$700</div><div class="metric-sub" id="empPct">20% of salary</div></div>
+        <div class="metric"><div class="metric-label">🏢 Employer's CPF</div><div class="metric-val" id="erAmt">$595</div><div class="metric-sub" id="erPct">17% of salary</div></div>
+        <div class="metric"><div class="metric-label">🏦 Total CPF</div><div class="metric-val" id="totAmt">$1,295</div><div class="metric-sub">Into your 3 accounts</div></div>
+        <div class="metric"><div class="metric-label">💸 Take-home pay</div><div class="metric-val" id="takehome">$2,800</div><div class="metric-sub">Cash in your pocket</div></div>
       </div>
 
-      <div class="section-label" style="margin-top:.75rem;">How total CPF is split across accounts</div>
+      <div class="section-label" style="margin-top:.75rem;">How CPF is split across the 3 accounts</div>
       <div class="legend-row">
-        <span class="legend-item"><span class="dot" style="background:#3266ad"></span>Ordinary Account (OA) — housing &amp; education</span>
-        <span class="legend-item"><span class="dot" style="background:#2e9e75"></span>Special Account (SA) — retirement</span>
-        <span class="legend-item"><span class="dot" style="background:#d85a30"></span>MediSave Account (MA) — healthcare</span>
+        <span class="legend-item"><span class="dot" style="background:#3266ad"></span>🏠 OA — housing</span>
+        <span class="legend-item"><span class="dot" style="background:#2e9e75"></span>👴 SA — retirement</span>
+        <span class="legend-item"><span class="dot" style="background:#d85a30"></span>🏥 MA — healthcare</span>
       </div>
       <div class="basket-bar" id="basketBar">
-        <div class="basket-seg" id="seg-oa" style="flex:23;background:#3266ad;color:#fff;">OA</div>
-        <div class="basket-seg" id="seg-sa" style="flex:6;background:#2e9e75;color:#fff;">SA</div>
-        <div class="basket-seg" id="seg-ma" style="flex:8;background:#d85a30;color:#fff;">MA</div>
+        <div class="basket-seg" id="seg-oa" style="flex:23;background:#3266ad;color:#fff;">🏠 OA</div>
+        <div class="basket-seg" id="seg-sa" style="flex:6;background:#2e9e75;color:#fff;">👴 SA</div>
+        <div class="basket-seg" id="seg-ma" style="flex:8;background:#d85a30;color:#fff;">🏥 MA</div>
       </div>
       <div class="card-grid">
-        <div class="metric"><div class="metric-label"><span class="dot" style="background:#3266ad"></span>OA monthly</div><div class="metric-val" id="oaAmt">$805</div><div class="metric-sub" id="oaPct">~23% of salary</div></div>
-        <div class="metric"><div class="metric-label"><span class="dot" style="background:#2e9e75"></span>SA monthly</div><div class="metric-val" id="saAmt">$210</div><div class="metric-sub" id="saPct">~6% of salary</div></div>
-        <div class="metric"><div class="metric-label"><span class="dot" style="background:#d85a30"></span>MA monthly</div><div class="metric-val" id="maAmt">$280</div><div class="metric-sub" id="maPct">~8% of salary</div></div>
+        <div class="metric"><div class="metric-label"><span class="dot" style="background:#3266ad"></span>OA/month</div><div class="metric-val" id="oaAmt">$805</div><div class="metric-sub" id="oaPct">~23%</div></div>
+        <div class="metric"><div class="metric-label"><span class="dot" style="background:#2e9e75"></span>SA/month</div><div class="metric-val" id="saAmt">$210</div><div class="metric-sub" id="saPct">~6%</div></div>
+        <div class="metric"><div class="metric-label"><span class="dot" style="background:#d85a30"></span>MA/month</div><div class="metric-val" id="maAmt">$280</div><div class="metric-sub" id="maPct">~8%</div></div>
       </div>
     </div>
 
-    <div class="section-label" style="margin-top:.5rem;">The three CPF accounts explained</div>
-    <div class="three-col">
+    <!-- Account cards with photos -->
+    <div class="section-label" style="margin-top:.5rem;">🗂️ The 3 CPF accounts in detail</div>
+    <div class="acct-grid">
       <div class="acct-card" style="border-top:3px solid #3266ad;">
-        <div class="acct-card-title" style="color:#3266ad;">Ordinary Account (OA)</div>
-        <div class="acct-card-body">Use for buying a home (HDB flat), paying mortgage, education fees. Earns <strong>2.5% interest</strong> per year.</div>
+        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&q=70&auto=format&fit=crop" alt="HDB flat housing" style="width:100%;height:90px;object-fit:cover;border-radius:6px;margin-bottom:10px;">
+        <span class="acct-icon">🏠</span>
+        <div class="acct-title" style="color:#3266ad;">Ordinary Account (OA)</div>
+        <div class="acct-body">Use for your <strong>HDB flat mortgage</strong>, education fees, and approved investments. This is where most working Singaporeans fund their home.</div>
+        <div class="acct-rate" style="background:#e8f1fb;color:#3266ad;">2.5% interest p.a.</div>
       </div>
       <div class="acct-card" style="border-top:3px solid #2e9e75;">
-        <div class="acct-card-title" style="color:#2e9e75;">Special Account (SA)</div>
-        <div class="acct-card-body">Locked for retirement. Earns <strong>4% per year</strong> — higher because you can't touch it until age 55. At 55, becomes your Retirement Account (RA).</div>
+        <img src="https://images.unsplash.com/photo-1473186578172-c141e6798cf4?w=400&q=70&auto=format&fit=crop" alt="Retirement savings" style="width:100%;height:90px;object-fit:cover;border-radius:6px;margin-bottom:10px;">
+        <span class="acct-icon">👴</span>
+        <div class="acct-title" style="color:#2e9e75;">Special Account (SA)</div>
+        <div class="acct-body">Locked for <strong>retirement</strong>. Earns higher interest because you can't withdraw until age 55. At 55 it becomes your Retirement Account (RA).</div>
+        <div class="acct-rate" style="background:#eaf3de;color:#2e9e75;">4% interest p.a.</div>
       </div>
       <div class="acct-card" style="border-top:3px solid #d85a30;">
-        <div class="acct-card-title" style="color:#d85a30;">MediSave Account (MA)</div>
-        <div class="acct-card-body">Pay for hospitalisation, surgery, and MediShield Life premiums. Earns <strong>4% per year</strong>.</div>
+        <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=400&q=70&auto=format&fit=crop" alt="Hospital healthcare" style="width:100%;height:90px;object-fit:cover;border-radius:6px;margin-bottom:10px;">
+        <span class="acct-icon">🏥</span>
+        <div class="acct-title" style="color:#d85a30;">MediSave Account (MA)</div>
+        <div class="acct-body">Pay for <strong>hospitalisation, surgery</strong> and MediShield Life premiums. Your healthcare safety net when medical bills get large.</div>
+        <div class="acct-rate" style="background:#faeeda;color:#d85a30;">4% interest p.a.</div>
       </div>
     </div>
 
-    <div class="info-box">
-      <strong>Key insight:</strong> CPF means your employer pays an extra 17% on top of your salary just for your CPF. A $3,500 salary actually costs your employer about $4,095/month. This is how the government ensures workers save for retirement, housing, and healthcare — even if they forget to save themselves.
+    <div class="info-box" style="margin-top:.5rem;">
+      🤔 <strong>Think about it:</strong> Your employer pays an extra 17% on top of your salary just for your CPF. A $3,500 salary actually costs your employer ~$4,095/month. The government designed CPF so that even people who don't think about saving — automatically save anyway.
     </div>
   </div>
 
-  <!-- ===== PART 2: BTO ===== -->
+  <!-- ══════════════ PART 2: BTO ══════════════ -->
   <div id="tab-bto" class="tab-panel">
 
-    <div class="section-label">Bedok South Blossoms BTO — May 2023 launch</div>
-    <div class="info-box" style="margin-bottom:1rem;">
-      9 residential blocks, 1,640 units along Bedok South Road &amp; Bedok South Avenue 3. Estimated completion: <strong>September 2027</strong>. 22 storeys max. Close to Bedok MRT, schools, and amenities.
+    <!-- BTO banner with Unsplash HDB photo -->
+    <div class="bto-banner">
+      <img src="https://images.unsplash.com/photo-1598228723793-52759bba239c?w=1200&q=80&auto=format&fit=crop" alt="Bedok Singapore HDB neighbourhood" loading="lazy">
+      <div class="bto-banner-overlay">
+        <div class="bto-banner-title">🏘️ Bedok South Blossoms</div>
+        <div class="bto-banner-sub">9 blocks · 1,640 units · Along Bedok South Road</div>
+        <span class="bto-tag">📅 Est. completion: September 2027</span>
+      </div>
     </div>
 
-    <div class="section-label">Step 1 — choose a flat type</div>
+    <!-- Project quick facts -->
+    <div class="callout-strip" style="margin-bottom:1rem;">
+      <div class="callout"><div class="callout-emoji">🏗️</div><div class="callout-val">9</div><div class="callout-label">residential blocks</div></div>
+      <div class="callout"><div class="callout-emoji">🏠</div><div class="callout-val">1,640</div><div class="callout-label">total units</div></div>
+      <div class="callout"><div class="callout-emoji">📐</div><div class="callout-val">22</div><div class="callout-label">storeys (highest)</div></div>
+      <div class="callout"><div class="callout-emoji">📍</div><div class="callout-val">Bedok</div><div class="callout-label">East Singapore</div></div>
+    </div>
+
+    <!-- Step 1: Flat type -->
+    <div class="step-badge"><div class="step-num">1</div><div class="step-label">Choose your flat type</div></div>
     <div class="flat-selector">
-      <div class="flat-btn" onclick="selectFlat(this,'2-Room Flexi',212500)">2-Room<div class="flat-price">~$213k</div></div>
-      <div class="flat-btn selected" onclick="selectFlat(this,'3-Room',358000)">3-Room<div class="flat-price">~$358k</div></div>
-      <div class="flat-btn" onclick="selectFlat(this,'4-Room',517500)">4-Room<div class="flat-price">~$518k</div></div>
-      <div class="flat-btn" onclick="selectFlat(this,'5-Room',662500)">5-Room<div class="flat-price">~$663k</div></div>
-      <div class="flat-btn" onclick="selectFlat(this,'3-Gen',663500)">3-Gen<div class="flat-price">~$664k</div></div>
+      <div class="flat-btn" onclick="selectFlat(this,'2-Room Flexi',212500)"><span class="flat-emoji">🛏️</span>2-Room<div class="flat-price">~$213k</div></div>
+      <div class="flat-btn selected" onclick="selectFlat(this,'3-Room',358000)"><span class="flat-emoji">🛏️🛏️</span>3-Room<div class="flat-price">~$358k</div></div>
+      <div class="flat-btn" onclick="selectFlat(this,'4-Room',517500)"><span class="flat-emoji">🏠</span>4-Room<div class="flat-price">~$518k</div></div>
+      <div class="flat-btn" onclick="selectFlat(this,'5-Room',662500)"><span class="flat-emoji">🏡</span>5-Room<div class="flat-price">~$663k</div></div>
+      <div class="flat-btn" onclick="selectFlat(this,'3-Gen',663500)"><span class="flat-emoji">👨‍👩‍👧‍👦</span>3-Gen<div class="flat-price">~$664k</div></div>
     </div>
-    <div class="info-box" id="flatInfo" style="margin-bottom:1rem;">3-Room flat: $320,000 – $396,000. Median price used: $358,000.</div>
+    <div class="info-box" id="flatInfo">🏠 3-Room flat: $320,000 – $396,000. Median price used: $358,000.</div>
 
-    <div class="section-label">Step 2 — randomise couple profiles</div>
-    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;">
-      <button class="btn-randomise" onclick="randomiseAll()">↺ Randomise both profiles</button>
-      <button class="btn-randomise" onclick="randomisePerson('p1')">↺ Randomise Person 1</button>
-      <button class="btn-randomise" onclick="randomisePerson('p2')">↺ Randomise Person 2</button>
+    <!-- Step 2: Profiles -->
+    <div class="step-badge" style="margin-top:1rem;"><div class="step-num">2</div><div class="step-label">Randomise your couple profiles</div></div>
+    <div class="btn-row">
+      <button class="btn-rand" onclick="randomiseAll()">🔀 Randomise both</button>
+      <button class="btn-rand" onclick="randomisePerson('p1')">🔀 Randomise Person 1</button>
+      <button class="btn-rand" onclick="randomisePerson('p2')">🔀 Randomise Person 2</button>
     </div>
 
     <div class="two-col">
-      <div class="profile-box" id="p1box">
+      <div class="profile-box">
         <div class="profile-header">
           <div class="avatar" id="p1av" style="background:#b5d4f4;color:#185fa5;">AH</div>
           <div>
-            <div style="font-size:14px;font-weight:500;color:var(--color-text-primary);" id="p1name">Ahmad Hassan</div>
-            <div style="font-size:11px;color:var(--color-text-secondary);" id="p1job">Marketing Executive</div>
+            <div style="font-size:14px;font-weight:600;color:var(--text-primary);" id="p1name">Ahmad Hassan</div>
+            <div style="font-size:11px;color:var(--text-secondary);" id="p1job">💼 Marketing Executive</div>
           </div>
         </div>
         <div class="profile-grid">
-          <div class="profile-row"><span class="profile-key">Age</span><span class="profile-val" id="p1age">26</span></div>
-          <div class="profile-row"><span class="profile-key">Monthly salary</span><span class="profile-val" id="p1sal">$3,200</span></div>
-          <div class="profile-row"><span class="profile-key">CPF OA/month</span><span class="profile-val" id="p1oa">$736</span></div>
-          <div class="profile-row"><span class="profile-key">Take-home</span><span class="profile-val" id="p1th">$2,560</span></div>
+          <div class="profile-row"><span class="profile-key">🎂 Age</span><span class="profile-val" id="p1age">26</span></div>
+          <div class="profile-row"><span class="profile-key">💵 Salary</span><span class="profile-val" id="p1sal">$3,200</span></div>
+          <div class="profile-row"><span class="profile-key">🏠 OA/month</span><span class="profile-val" id="p1oa">$736</span></div>
+          <div class="profile-row"><span class="profile-key">💸 Take-home</span><span class="profile-val" id="p1th">$2,560</span></div>
         </div>
       </div>
-      <div class="profile-box" id="p2box">
+      <div class="profile-box">
         <div class="profile-header">
           <div class="avatar" id="p2av" style="background:#9fe1cb;color:#0f6e56;">SL</div>
           <div>
-            <div style="font-size:14px;font-weight:500;color:var(--color-text-primary);" id="p2name">Sarah Lim</div>
-            <div style="font-size:11px;color:var(--color-text-secondary);" id="p2job">Accountant</div>
+            <div style="font-size:14px;font-weight:600;color:var(--text-primary);" id="p2name">Sarah Lim</div>
+            <div style="font-size:11px;color:var(--text-secondary);" id="p2job">💼 Accountant</div>
           </div>
         </div>
         <div class="profile-grid">
-          <div class="profile-row"><span class="profile-key">Age</span><span class="profile-val" id="p2age">25</span></div>
-          <div class="profile-row"><span class="profile-key">Monthly salary</span><span class="profile-val" id="p2sal">$3,800</span></div>
-          <div class="profile-row"><span class="profile-key">CPF OA/month</span><span class="profile-val" id="p2oa">$874</span></div>
-          <div class="profile-row"><span class="profile-key">Take-home</span><span class="profile-val" id="p2th">$3,040</span></div>
+          <div class="profile-row"><span class="profile-key">🎂 Age</span><span class="profile-val" id="p2age">25</span></div>
+          <div class="profile-row"><span class="profile-key">💵 Salary</span><span class="profile-val" id="p2sal">$3,800</span></div>
+          <div class="profile-row"><span class="profile-key">🏠 OA/month</span><span class="profile-val" id="p2oa">$874</span></div>
+          <div class="profile-row"><span class="profile-key">💸 Take-home</span><span class="profile-val" id="p2th">$3,040</span></div>
         </div>
       </div>
     </div>
 
-    <div class="section-label">Step 3 — loan &amp; grant assumptions</div>
+    <!-- Step 3: Loan -->
+    <div class="step-badge"><div class="step-num">3</div><div class="step-label">Set your loan &amp; grant details</div></div>
     <div class="card">
       <div class="slider-row">
-        <label>HDB loan (2.6% p.a.)</label>
+        <label>🏦 HDB loan (2.6%)</label>
         <input type="range" id="loanPct" min="50" max="90" step="5" value="80" oninput="updateLoan()">
         <span class="slider-val" id="loanPctOut">80%</span>
       </div>
       <div class="slider-row">
-        <label>Loan tenure</label>
+        <label>📅 Loan tenure</label>
         <input type="range" id="tenureSlider" min="15" max="25" step="5" value="25" oninput="updateLoan()">
         <span class="slider-val" id="tenureOut">25 yrs</span>
       </div>
       <div class="slider-row">
-        <label>CPF Housing Grant</label>
+        <label>🎁 CPF Grant</label>
         <select id="grantSel" onchange="updateLoan()">
-          <option value="80000">Enhanced CPF Grant — $80,000 (household income ≤ $9k)</option>
-          <option value="60000">Enhanced CPF Grant — $60,000 (household income ≤ $11k)</option>
-          <option value="40000">Enhanced CPF Grant — $40,000 (household income ≤ $14k)</option>
+          <option value="80000">Enhanced Grant — $80,000 (income ≤ $9k/mth)</option>
+          <option value="60000">Enhanced Grant — $60,000 (income ≤ $11k/mth)</option>
+          <option value="40000">Enhanced Grant — $40,000 (income ≤ $14k/mth)</option>
           <option value="0">No grant / not eligible</option>
         </select>
       </div>
     </div>
 
-    <div class="calc-center">
-      <button class="btn-calc" onclick="calculate()">Calculate affordability →</button>
-    </div>
+    <button class="btn-calc" onclick="calculate()">🧮 Calculate affordability →</button>
 
-    <div id="resultArea" style="display:none;">
-      <div class="section-label">Affordability breakdown</div>
+    <!-- Results -->
+    <div id="resultArea" style="display:none;margin-top:1.25rem;">
+      <div class="section-label">📊 Your affordability breakdown</div>
       <div class="two-col" style="margin-bottom:10px;">
-        <div class="card">
-          <div class="big-result">
-            <div class="big-result-num" id="monthlyPayment">$1,200</div>
-            <div class="big-result-label">Monthly mortgage payment</div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="big-result">
-            <div class="big-result-num" id="oaCover">$1,610</div>
-            <div class="big-result-label">Combined OA per month</div>
-          </div>
-        </div>
+        <div class="card"><div class="big-result"><div class="big-result-num" id="monthlyPayment">$1,200</div><div class="big-result-label">🏦 Monthly mortgage</div></div></div>
+        <div class="card"><div class="big-result"><div class="big-result-num" id="oaCover">$1,610</div><div class="big-result-label">🏠 Combined OA/month</div></div></div>
       </div>
-
       <div class="card">
         <div class="result-breakdown">
-          <div class="result-row"><span>Flat price (median)</span><span id="rb-price">$358,000</span></div>
-          <div class="result-row"><span>Less CPF Housing Grant</span><span id="rb-grant" class="result-sign-pos">−$80,000</span></div>
-          <div class="result-row"><span>Down payment required (20%)</span><span id="rb-dp">$55,600</span></div>
-          <div class="result-row"><span>HDB loan amount</span><span id="rb-loan">$222,400</span></div>
-          <div class="result-row total"><span>Monthly mortgage</span><span id="rb-monthly">$1,200</span></div>
-          <div class="result-row" style="padding-top:10px;"><span>Combined OA contributions</span><span id="rb-oa">$1,610</span></div>
-          <div class="result-row"><span>OA surplus / shortfall after mortgage</span><span id="rb-surplus">+$410</span></div>
-          <div class="result-row"><span>Combined take-home (both)</span><span id="rb-takehome">$5,600</span></div>
+          <div class="result-row"><span>🏠 Flat price (median)</span><span id="rb-price">$358,000</span></div>
+          <div class="result-row"><span>🎁 Less CPF Housing Grant</span><span id="rb-grant" class="pos">−$80,000</span></div>
+          <div class="result-row"><span>💳 Down payment (20%)</span><span id="rb-dp">$55,600</span></div>
+          <div class="result-row"><span>🏦 HDB loan amount</span><span id="rb-loan">$222,400</span></div>
+          <div class="result-row total"><span>📅 Monthly mortgage</span><span id="rb-monthly">$1,200</span></div>
+          <div class="result-row" style="padding-top:10px;"><span>🏠 Combined OA contributions</span><span id="rb-oa">$1,610</span></div>
+          <div class="result-row"><span>📈 OA surplus / shortfall</span><span id="rb-surplus">+$410</span></div>
+          <div class="result-row"><span>💸 Combined take-home pay</span><span id="rb-takehome">$5,600</span></div>
         </div>
       </div>
-
-      <div id="verdictBox" class="verdict ok"></div>
-
+      <div id="verdictBox" class="verdict ok"><span class="verdict-icon">✅</span><span id="verdictText"></span></div>
       <div class="info-box" style="margin-top:10px;">
-        <strong>What does this mean?</strong> The CPF system lets you pay your mortgage using OA savings — you don't need to use your take-home cash for the monthly instalment. But you must save enough OA over time for the down payment first. This is how CPF links housing affordability with long-term retirement savings.
+        🔗 <strong>The big picture:</strong> CPF lets you pay your mortgage using OA savings automatically — no need to transfer cash manually each month. The government designed this so homeownership is achievable for regular working Singaporeans, not just the wealthy.
       </div>
-
       <div style="margin-top:1.5rem;">
-        <div class="section-label">Monthly cash flow summary (both people combined)</div>
+        <div class="section-label">💹 Monthly cash flow — both people combined</div>
         <div style="position:relative;width:100%;height:240px;">
-          <canvas id="cashChart" role="img" aria-label="Bar chart showing combined monthly salary, CPF deductions, take-home pay, and mortgage payment.">Cash flow breakdown for the couple.</canvas>
+          <canvas id="cashChart" role="img" aria-label="Bar chart showing combined monthly salary, CPF deducted, take-home pay, and monthly mortgage.">Cash flow bar chart.</canvas>
         </div>
       </div>
     </div>
@@ -419,61 +445,47 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
-var selectedFlatPrice = 358000;
-var selectedFlatType = '3-Room';
-var p1Data = {name:'Ahmad Hassan',job:'Marketing Executive',age:26,sal:3200,oa:736,th:2560,initials:'AH',col:{bg:'#b5d4f4',fg:'#185fa5'}};
-var p2Data = {name:'Sarah Lim',job:'Accountant',age:25,sal:3800,oa:874,th:3040,initials:'SL',col:{bg:'#9fe1cb',fg:'#0f6e56'}};
+var selectedFlatPrice=358000,selectedFlatType='3-Room';
+var p1Data={name:'Ahmad Hassan',job:'💼 Marketing Executive',age:26,sal:3200,oa:736,th:2560,initials:'AH',col:{bg:'#b5d4f4',fg:'#185fa5'}};
+var p2Data={name:'Sarah Lim',job:'💼 Accountant',age:25,sal:3800,oa:874,th:3040,initials:'SL',col:{bg:'#9fe1cb',fg:'#0f6e56'}};
 
-var profiles = [
-  {name:'Ahmad Hassan',job:'Marketing Executive'},{name:'Sarah Lim',job:'Accountant'},
-  {name:'Ravi Kumar',job:'Software Engineer'},{name:'Mei Ling Tan',job:'Nurse'},
-  {name:'Daniel Ong',job:'Teacher'},{name:'Priya Nair',job:'Graphic Designer'},
-  {name:'Chong Wei',job:'Civil Servant'},{name:'Aisha Binte',job:'HR Manager'},
-  {name:'Jason Koh',job:'Logistics Coordinator'},{name:'Nurul Ain',job:'Financial Analyst'},
-  {name:'Bryan Teo',job:'Retail Manager'},{name:'Jasmine Yap',job:'Social Worker'},
+var profiles=[
+  {name:'Ahmad Hassan',job:'💼 Marketing Executive'},{name:'Sarah Lim',job:'💼 Accountant'},
+  {name:'Ravi Kumar',job:'💻 Software Engineer'},{name:'Mei Ling Tan',job:'🏥 Nurse'},
+  {name:'Daniel Ong',job:'📚 Teacher'},{name:'Priya Nair',job:'🎨 Graphic Designer'},
+  {name:'Chong Wei',job:'🏛️ Civil Servant'},{name:'Aisha Binte',job:'👥 HR Manager'},
+  {name:'Jason Koh',job:'📦 Logistics Coordinator'},{name:'Nurul Ain',job:'📊 Financial Analyst'},
+  {name:'Bryan Teo',job:'🛍️ Retail Manager'},{name:'Jasmine Yap',job:'❤️ Social Worker'},
+  {name:'Kenneth Goh',job:'⚙️ Mechanical Engineer'},{name:'Fatimah Zahra',job:'⚖️ Paralegal'},
 ];
-var salaryRanges = [2200,2500,2800,3000,3200,3500,3800,4200,4500,5000,5500,6000];
-var avatarColors = [
+var salaryRanges=[2200,2500,2800,3000,3200,3500,3800,4000,4200,4500,5000,5500,6000];
+var avatarColors=[
   {bg:'#b5d4f4',fg:'#185fa5'},{bg:'#9fe1cb',fg:'#0f6e56'},
   {bg:'#f5c4b3',fg:'#993c1d'},{bg:'#f4c0d1',fg:'#993556'},
   {bg:'#c0dd97',fg:'#3b6d11'},{bg:'#fac775',fg:'#854f0b'},
+  {bg:'#cecbf6',fg:'#534ab7'},{bg:'#f0995a',fg:'#712b13'},
 ];
 
-function getTotalEmpRate(age) {
-  if (age<=55) return 0.20; if (age<=60) return 0.18;
-  if (age<=65) return 0.125; if (age<=70) return 0.075; return 0.05;
-}
-function getTotalRate(age) {
-  if (age<=55) return 0.37; if (age<=60) return 0.34;
-  if (age<=65) return 0.25; if (age<=70) return 0.165; return 0.125;
-}
-function getOAFrac(age) {
-  if (age<=35) return 23/37; if (age<=45) return 21/37;
-  if (age<=55) return 19/37; if (age<=60) return 21/34;
-  if (age<=65) return 13/25; return 7.5/16.5;
-}
+function getTotalEmpRate(a){return a<=55?.20:a<=60?.18:a<=65?.125:a<=70?.075:.05;}
+function getTotalRate(a){return a<=55?.37:a<=60?.34:a<=65?.25:a<=70?.165:.125;}
+function getOAFrac(a){return a<=35?23/37:a<=45?21/37:a<=55?19/37:a<=60?21/34:a<=65?13/25:7.5/16.5;}
 
-function randomisePerson(pid) {
-  var p = profiles[Math.floor(Math.random()*profiles.length)];
-  var sal = salaryRanges[Math.floor(Math.random()*salaryRanges.length)];
-  var age = 22 + Math.floor(Math.random()*10);
-  var col = avatarColors[Math.floor(Math.random()*avatarColors.length)];
-  var initials = p.name.split(' ').map(function(w){return w[0];}).slice(0,2).join('');
-  var empRate = getTotalEmpRate(age);
-  var totRate = getTotalRate(age);
-  var oaFrac = getOAFrac(age);
-  var totalCPF = Math.round(sal * totRate);
-  var oa = Math.round(totalCPF * oaFrac);
-  var th = Math.round(sal * (1 - empRate));
-  var data = {name:p.name,job:p.job,age:age,sal:sal,oa:oa,th:th,initials:initials,col:col};
-  if (pid==='p1') p1Data=data; else p2Data=data;
+function randomisePerson(pid){
+  var p=profiles[Math.floor(Math.random()*profiles.length)];
+  var sal=salaryRanges[Math.floor(Math.random()*salaryRanges.length)];
+  var age=22+Math.floor(Math.random()*10);
+  var col=avatarColors[Math.floor(Math.random()*avatarColors.length)];
+  var initials=p.name.split(' ').map(function(w){return w[0];}).slice(0,2).join('');
+  var empRate=getTotalEmpRate(age),totRate=getTotalRate(age),oaFrac=getOAFrac(age);
+  var totalCPF=Math.round(sal*totRate);
+  var data={name:p.name,job:p.job,age:age,sal:sal,oa:Math.round(totalCPF*oaFrac),th:Math.round(sal*(1-empRate)),initials:initials,col:col};
+  if(pid==='p1') p1Data=data; else p2Data=data;
   renderProfile(pid,data);
   document.getElementById('resultArea').style.display='none';
 }
+function randomiseAll(){randomisePerson('p1');randomisePerson('p2');}
 
-function randomiseAll() { randomisePerson('p1'); randomisePerson('p2'); }
-
-function renderProfile(pid,d) {
+function renderProfile(pid,d){
   document.getElementById(pid+'name').textContent=d.name;
   document.getElementById(pid+'job').textContent=d.job;
   document.getElementById(pid+'age').textContent=d.age;
@@ -481,102 +493,59 @@ function renderProfile(pid,d) {
   document.getElementById(pid+'oa').textContent='$'+d.oa.toLocaleString();
   document.getElementById(pid+'th').textContent='$'+d.th.toLocaleString();
   var av=document.getElementById(pid+'av');
-  av.textContent=d.initials; av.style.background=d.col.bg; av.style.color=d.col.fg;
+  av.textContent=d.initials;av.style.background=d.col.bg;av.style.color=d.col.fg;
 }
 
-function selectFlat(el,type,price) {
+function selectFlat(el,type,price){
   document.querySelectorAll('.flat-btn').forEach(function(b){b.classList.remove('selected');});
   el.classList.add('selected');
-  selectedFlatType=type; selectedFlatPrice=price;
-  var ranges={
-    '2-Room Flexi':'$165,000 – $260,000. Median price used: $213,000.',
-    '3-Room':'$320,000 – $396,000. Median price used: $358,000.',
-    '4-Room':'$448,000 – $587,000. Median price used: $518,000.',
-    '5-Room':'$588,000 – $737,000. Median price used: $663,000.',
-    '3-Gen':'$605,000 – $722,000. Median price used: $664,000.',
-  };
-  document.getElementById('flatInfo').textContent=type+' flat: '+ranges[type];
+  selectedFlatType=type;selectedFlatPrice=price;
+  var ranges={'2-Room Flexi':'$165,000 – $260,000. Median used: $213,000.','3-Room':'$320,000 – $396,000. Median used: $358,000.','4-Room':'$448,000 – $587,000. Median used: $518,000.','5-Room':'$588,000 – $737,000. Median used: $663,000.','3-Gen':'$605,000 – $722,000. Median used: $664,000.'};
+  document.getElementById('flatInfo').textContent='🏠 '+type+' flat: '+ranges[type];
   document.getElementById('resultArea').style.display='none';
 }
 
 var cashChartInst=null;
-function calculate() {
-  var price=selectedFlatPrice;
-  var grant=parseInt(document.getElementById('grantSel').value);
-  var tenure=parseInt(document.getElementById('tenureSlider').value);
-  var effectivePrice=price-grant;
-  var downpay=Math.round(effectivePrice*0.20);
-  var loanAmt=Math.round(effectivePrice*0.80);
-  var r=0.026/12; var n=tenure*12;
-  var monthly=Math.round(loanAmt*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1));
-  var combinedOA=(p1Data.oa||736)+(p2Data.oa||874);
-  var surplus=combinedOA-monthly;
-  var combinedTH=(p1Data.th||2560)+(p2Data.th||3040);
-  var combinedSal=(p1Data.sal||3200)+(p2Data.sal||3800);
-
+function calculate(){
+  var price=selectedFlatPrice,grant=parseInt(document.getElementById('grantSel').value),tenure=parseInt(document.getElementById('tenureSlider').value);
+  var eff=price-grant,dp=Math.round(eff*.20),loan=Math.round(eff*.80);
+  var r=0.026/12,n=tenure*12,monthly=Math.round(loan*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1));
+  var combOA=(p1Data.oa||736)+(p2Data.oa||874),surplus=combOA-monthly;
+  var combTH=(p1Data.th||2560)+(p2Data.th||3040),combSal=(p1Data.sal||3200)+(p2Data.sal||3800);
   document.getElementById('monthlyPayment').textContent='$'+monthly.toLocaleString();
-  document.getElementById('oaCover').textContent='$'+combinedOA.toLocaleString();
+  document.getElementById('oaCover').textContent='$'+combOA.toLocaleString();
   document.getElementById('rb-price').textContent='$'+price.toLocaleString();
   document.getElementById('rb-grant').textContent='−$'+grant.toLocaleString();
-  document.getElementById('rb-dp').textContent='$'+downpay.toLocaleString();
-  document.getElementById('rb-loan').textContent='$'+loanAmt.toLocaleString();
+  document.getElementById('rb-dp').textContent='$'+dp.toLocaleString();
+  document.getElementById('rb-loan').textContent='$'+loan.toLocaleString();
   document.getElementById('rb-monthly').textContent='$'+monthly.toLocaleString();
-  document.getElementById('rb-oa').textContent='$'+combinedOA.toLocaleString();
+  document.getElementById('rb-oa').textContent='$'+combOA.toLocaleString();
   document.getElementById('rb-surplus').textContent=(surplus>=0?'+':'')+'$'+surplus.toLocaleString();
-  document.getElementById('rb-surplus').className='result-sign-'+(surplus>=0?'pos':'neg');
-  document.getElementById('rb-takehome').textContent='$'+combinedTH.toLocaleString();
-
-  var vb=document.getElementById('verdictBox');
-  var ratio=monthly/combinedSal;
-  if (surplus>=0 && ratio<0.35) {
-    vb.className='verdict ok';
-    vb.textContent='Affordable! The combined OA contributions of $'+combinedOA.toLocaleString()+'/month cover the mortgage. Take-home pay of $'+combinedTH.toLocaleString()+'/month is left for all living expenses. The government grant and CPF system make this work.';
-  } else if (surplus>=0 && ratio<0.5) {
-    vb.className='verdict tight';
-    vb.textContent='Manageable but stretched. OA covers the mortgage, but it\'s a significant portion of combined salary. Remember: you still need to save $'+downpay.toLocaleString()+' for the down payment first!';
-  } else {
-    vb.className='verdict hard';
-    vb.textContent='Challenging. The mortgage of $'+monthly.toLocaleString()+'/month is difficult to cover with OA savings of $'+combinedOA.toLocaleString()+'/month. Consider a smaller flat, a longer loan tenure, or a higher-income profile.';
-  }
-
+  document.getElementById('rb-surplus').className=surplus>=0?'pos':'neg';
+  document.getElementById('rb-takehome').textContent='$'+combTH.toLocaleString();
+  var vb=document.getElementById('verdictBox'),ratio=monthly/combSal;
+  if(surplus>=0&&ratio<0.35){vb.className='verdict ok';document.querySelector('.verdict-icon').textContent='✅';document.getElementById('verdictText').textContent='Affordable! OA contributions of $'+combOA.toLocaleString()+'/month cover the mortgage. Combined take-home of $'+combTH.toLocaleString()+'/month left for daily living. The CPF grant and system make this work!';}
+  else if(surplus>=0&&ratio<0.5){vb.className='verdict tight';document.querySelector('.verdict-icon').textContent='⚠️';document.getElementById('verdictText').textContent='Manageable but tight. OA covers the mortgage but it\'s a large share of income. Remember you\'ll also need to save $'+dp.toLocaleString()+' for the down payment — that takes time!';}
+  else{vb.className='verdict hard';document.querySelector('.verdict-icon').textContent='❌';document.getElementById('verdictText').textContent='Challenging. Mortgage of $'+monthly.toLocaleString()+'/month is hard to cover with OA savings of $'+combOA.toLocaleString()+'/month. Consider a smaller flat type, longer tenure, or higher income profiles.';}
   document.getElementById('resultArea').style.display='block';
-  if (cashChartInst) cashChartInst.destroy();
-  var p1emp=Math.round((p1Data.sal||3200)*0.20), p2emp=Math.round((p2Data.sal||3800)*0.20);
-  cashChartInst=new Chart(document.getElementById('cashChart'),{
-    type:'bar',
-    data:{
-      labels:['Combined gross salary','CPF deducted (employees)','Take-home pay','Monthly mortgage'],
-      datasets:[{
-        label:'Amount ($)',
-        data:[combinedSal,p1emp+p2emp,combinedTH,monthly],
-        backgroundColor:['#3266ad','#d85a30','#2e9e75','#e8a020'],
-        borderRadius:4
-      }]
-    },
-    options:{
-      responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){return '$'+ctx.raw.toLocaleString();}}}},
-      scales:{
-        y:{ticks:{callback:function(v){return '$'+v.toLocaleString();}},grid:{color:'rgba(128,128,128,.1)'}},
-        x:{grid:{display:false}}
-      }
-    }
-  });
+  if(cashChartInst) cashChartInst.destroy();
+  var p1emp=Math.round((p1Data.sal||3200)*.20),p2emp=Math.round((p2Data.sal||3800)*.20);
+  cashChartInst=new Chart(document.getElementById('cashChart'),{type:'bar',data:{labels:['💵 Combined salary','🏦 CPF deducted','💸 Take-home pay','🏠 Mortgage'],datasets:[{label:'Amount ($)',data:[combSal,p1emp+p2emp,combTH,monthly],backgroundColor:['#3266ad','#d85a30','#2e9e75','#e8a020'],borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){return '$'+ctx.raw.toLocaleString();}}}},scales:{y:{ticks:{callback:function(v){return '$'+v.toLocaleString();}},grid:{color:'rgba(128,128,128,.08)'}},x:{grid:{display:false}}}}});
 }
 
-function updateLoan() {
+function updateLoan(){
   document.getElementById('loanPctOut').textContent=document.getElementById('loanPct').value+'%';
   document.getElementById('tenureOut').textContent=document.getElementById('tenureSlider').value+' yrs';
 }
 
-function switchTab(e,tab) {
+function switchTab(e,tab){
   document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active');});
   document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
   document.getElementById('tab-'+tab).classList.add('active');
   e.currentTarget.classList.add('active');
 }
 
-function updateCPF() {
+function updateCPF(){
   var sal=parseInt(document.getElementById('salSlider').value);
   document.getElementById('salOut').textContent='$'+sal.toLocaleString();
   var parts=document.getElementById('ageGroup').value.split(',');
@@ -589,7 +558,7 @@ function updateCPF() {
   document.getElementById('empPct').textContent=emp+'% of salary';
   document.getElementById('erPct').textContent=er+'% of salary';
   var oaF,saF,maF;
-  if (total>=37){oaF=23/37;saF=6/37;maF=8/37;}
+  if(total>=37){oaF=23/37;saF=6/37;maF=8/37;}
   else if(total>=34){oaF=21/34;saF=7/34;maF=6/34;}
   else if(total>=25){oaF=13/25;saF=4.5/25;maF=7.5/25;}
   else{oaF=7.5/16.5;saF=1.5/16.5;maF=7.5/16.5;}
@@ -597,16 +566,15 @@ function updateCPF() {
   document.getElementById('oaAmt').textContent='$'+oa.toLocaleString();
   document.getElementById('saAmt').textContent='$'+sa.toLocaleString();
   document.getElementById('maAmt').textContent='$'+ma.toLocaleString();
-  document.getElementById('oaPct').textContent='~'+Math.round(oaF*100)+'% of salary';
-  document.getElementById('saPct').textContent='~'+Math.round(saF*100)+'% of salary';
-  document.getElementById('maPct').textContent='~'+Math.round(maF*100)+'% of salary';
+  document.getElementById('oaPct').textContent='~'+Math.round(oaF*100)+'%';
+  document.getElementById('saPct').textContent='~'+Math.round(saF*100)+'%';
+  document.getElementById('maPct').textContent='~'+Math.round(maF*100)+'%';
   document.getElementById('seg-oa').style.flex=oa;
   document.getElementById('seg-sa').style.flex=sa;
   document.getElementById('seg-ma').style.flex=ma;
 }
 
-updateCPF();
-updateLoan();
+updateCPF();updateLoan();
 </script>
 </body>
 </html>
